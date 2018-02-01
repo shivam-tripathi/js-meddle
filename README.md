@@ -2,7 +2,7 @@
 
 ================================================================================
 
-Code written while meddling with js es6 and react.
+Code written while meddling with js es6, react, express and related stuff.
 
 Run the following to transpile ES6 via babel and run the server.
 ```shell

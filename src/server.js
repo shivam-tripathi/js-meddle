@@ -1,31 +1,45 @@
 import express from 'express';
 import path from 'path';
+import mongoose from 'mongoose';
+import User from './models/user';
+import passport from 'passport';
+import cookie from 'cookie-parser';
+import session from 'express-session';
+import bodyParser from 'body-parser';
 
 const app = express();
 
-let alpha = 'beta';
-console.log(alpha);
-
-app.set('view engine', 'jade');
 app.set('views', __dirname + '/../src/views');
-app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'pug');
 app.set('view engine', 'html');
-app.engine('jade', require('jade').__express);
+app.engine('pug', require('pug').__express);
 app.engine('html', require('ejs').renderFile);
 
 app.use(express.static(__dirname + '/static'));
+app.use(cookie('someSecretString'));
+app.use(session({
+	secret: 'anotherSecretString',
+	resave: false,
+  	saveUninitialized: false
+}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-// app.set('views', __dirname + '/routes');
-// app.engine('html', require('ejs').__express);
-// app.set('view engine', 'html');
+mongoose.connect('mongodb://localhost/ch01', (err) => {
+	 if (err) throw err
+});
 
 app.get('/', (req, res, next) => {
-	res.render('index.html');
+	res.render('index.pug');
 });
+
+function work(name="Shane") {
+	console.log(name);
+}
 
 app.listen('4321', '0.0.0.0');
 console.log('Express started on port 4321');
-console.log('All the best!');
-console.log(__dirname);
-
-
