@@ -1,21 +1,32 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
+var createElementsfromList = (arr, field) => arr.map(
+    (val, i) => React.createElement(field, {'key': i}, val)
+);
 
-function Welcome(props) {
-  return <h1>Hello, {props.name}</h1>;
+const Ingredients = React.createFactory(({dish}) => {
+    return React.createElement('div', {'id': "dish"},
+        React.DOM.h1(null, "SALMON"),
+        React.DOM.ul(null, createElementsfromList(dish.salmon, 'li'))
+    );
+});
+
+class Dishes {
+    constructor() {}
+    render () {
+    }
 }
 
-function App() {
-  return (
-    <div>
-      <Welcome name="Sara" />
-      <Welcome name="Cahal" />
-      <Welcome name="Edite" />
-    </div>
-  );
+let dish = {
+  'salmon' : [
+    "1 lb Salmon",
+    "1 cup Pine Nuts",
+    "2 cups Butter Lettuce",
+    "1 Yellow Squash",
+    "1/2 cup Olive Oil",
+    "3 cloves of Garlic"
+  ]
 }
 
 ReactDOM.render(
-  <App />,
-  document.getElementById('react-container')
+    Ingredients({dish}),
+    document.getElementById('react-container')
 );
