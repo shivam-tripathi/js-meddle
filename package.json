@@ -5,10 +5,14 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf ./lib",
-    "start": "nodemon --watch './src' --exec 'npm run build && node ./lib/server/server.js'",
+    "start": "npm run build && npm run runserver & npm run startdaemons",
+    "startdaemons": "npm run clientdaemon & npm run serverdaemon",
+    "clientdaemon": "nodemon --watch './src/client' --exec 'npm run buildclient'",
+    "serverdaemon": "nodemon --watch './src/server' --exec 'npm run buildserver'",
     "build": "babel src/server -d lib/server && webpack",
-    "runserver": "node ./lib/server/server.js",
-    "webpack": "webpack --display-error-details"
+    "runserver": "node ./lib/server/app.js",
+    "buildclient": "webpack --display-error-details",
+    "buildserver": "babel src/server -d lib/server"
   },
   "repository": {
     "type": "git",
@@ -19,12 +23,16 @@
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.1",
+    "connect-redis": "^3.3.3",
     "consolidate": "^0.15.0",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
-    "mongoose": "^5.0.1",
+    "mongoose": "^5.0.4",
+    "morgan": "^1.9.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
@@ -32,7 +40,7 @@
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
-    "validator": "^9.2.0"
+    "validator": "^9.4.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
