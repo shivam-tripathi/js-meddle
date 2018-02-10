@@ -1,0 +1,18 @@
+{
+    "cookie": {
+        "secret": "cookieSecretKey",
+        "resave": true,
+	    "saveUninitialized": true
+    },
+	"session": {
+		"secret": "sessionSecretKey",
+		"secure": false
+	},
+	"database": {
+		"client": "mongodb",
+		"connection": {
+			"host": "localhost"
+        },
+        "url": "mongodb://localhost/ch01"
+	}
+}
