@@ -4,10 +4,10 @@ module.exports = {
     entry: __dirname + "/src/client/js/client.js",
     output: {
          path: __dirname + "/lib/client/js",
-         filename: "bundle.js",
-         sourceMapFilename: 'bundle.map'
+         filename: "bundle.js"
+        //  sourceMapFilename: 'bundle.map'
     },
-    devtool: '#source-map',
+    // devtool: '#source-map',
     module: {
         rules: [
             {
